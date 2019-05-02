@@ -26,7 +26,7 @@ namespace Question
         }
         void StartLoaderThread()
         {
-            loaderThread = new Thread(new ThreadStart(loader.OnLoadQuestions));
+            loaderThread = new Thread(new ThreadStart(loader.OnLoad));
             loaderThread.Start();
         }
 
@@ -65,8 +65,13 @@ namespace Question
         {
             lock (questions)
             {
-                creator.SetQuestion(questions.Dequeue());
+                if ( HasAnyQuestion() )
+                    creator.SetQuestion(questions.Dequeue());
             }
+        }
+        bool HasAnyQuestion()
+        {
+            return questions.Count != 0;
         }
 
         private void Start()

@@ -18,19 +18,24 @@ namespace Ansver
         public void OnUserAnsverChoice(UIAnsver ansver)
         {
             MakeAnsverReaction(ansver);
-            OnAnsverProcessed(isCorrectAnsver(ansver));
+            OnAnsverProcessed(IsCorrectAnsver(ansver));
         }
 
         void MakeAnsverReaction(UIAnsver ansver)
         {
-            if (isCorrectAnsver(ansver))
+            if (IsCorrectAnsver(ansver))
                 OnCorrectAnsver();
             else
                 OnIncorrectAnsver();
         }
-        bool isCorrectAnsver(UIAnsver ansver)
+        bool IsCorrectAnsver(UIAnsver ansver)
         {
-            return correct == ansver;
+#if DEBUG
+            return correct != null ? correct.number == ansver.number
+                                   : false;
+#else
+            return correct.number == ansver.number;
+#endif
         }
         void OnCorrectAnsver()
         {
