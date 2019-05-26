@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Ansver
 {
@@ -8,7 +6,7 @@ namespace Ansver
     {
         public UIAnsver ansver;
 
-        Manager manager;
+        CManager manager;
 
         public void TriggerAnsver()
         {
@@ -21,7 +19,7 @@ namespace Ansver
         }
         private void InitializeManager()
         {
-            manager = FindObjectOfType<Manager>();
+            manager = FindObjectOfType<CManager>();
         }
     } 
 }

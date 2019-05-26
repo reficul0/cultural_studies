@@ -3,6 +3,7 @@ namespace Character
 {
     public struct Structure
     {
-        uint suitLevel;
+        public uint suitLevel;
+        public int energy;
     }
 }

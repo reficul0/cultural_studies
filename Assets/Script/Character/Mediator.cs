@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Character
 {
@@ -12,16 +10,35 @@ namespace Character
         public void Attack()
         {
             animator.PlayAttack();
+            DecreaseEnergy();
         }
-
         public void OnAttacked()
         {
             animator.PlayAttacked();
+            DecreaseEnergy();
+        }
+        void DecreaseEnergy()
+        {
+            --character.energy;
         }
 
+        public int GetEnergy()
+        {
+            return character.energy;
+        }
+
+        public bool IsGameLost()
+        {
+            return character.energy <= 0;
+        }
         public void OnLostGame()
         {
             animator.PlayLostGame();
+        }
+
+        void Start()
+        {
+            character = Factory.Create();
         }
     } 
 }

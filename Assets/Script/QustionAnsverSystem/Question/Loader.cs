@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
@@ -9,7 +7,7 @@ namespace Question
     public class Loader
     {
         public Manager questionsDestination;
-        public static string questionsFile = Application.persistentDataPath + "/questions.txt";
+        public static string questionsFile = Application.dataPath + "/questions.txt";
         QuestionStruct[] questionsCache = new QuestionStruct[0];
 
         public Loader(Manager questionsDestination)

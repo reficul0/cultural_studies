@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,14 +7,14 @@ namespace Question
 {
     public class Setter : MonoBehaviour
     {
-        public Text question;
+        public TextMeshProUGUI question;
 
-        public Text leftUp;
-        public Text leftDown;
-        public Text rightUp;
-        public Text rightDown;
+        public TextMeshProUGUI leftUp;
+        public TextMeshProUGUI leftDown;
+        public TextMeshProUGUI rightUp;
+        public TextMeshProUGUI rightDown;
 
-        Ansver.Manager manager;
+        Ansver.CManager manager;
 
         public void SetQuestion(QuestionStruct creating)
         {
@@ -22,14 +22,75 @@ namespace Question
         }
         void SetGUIQuestion(QuestionStruct creating)
         {
-            question.text = creating.text;
+            ResetTextBoxes();
 
-            leftUp.text = creating.options.leftUp;
-            leftDown.text = creating.options.leftDown;
-            rightUp.text = creating.options.rightUp;
-            rightDown.text = creating.options.rightDown;
+            StopAllCoroutines();
+            StartCoroutine(TypeSentence(creating));
 
             manager.SetCorrectAnsver(creating.correct);
+        }
+
+        IEnumerator TypeSentence(QuestionStruct creating)
+        {
+            yield return new WaitForSeconds(.5f);
+
+            var textBox = question;
+            var text = creating.text;
+            foreach (var letter in text.ToCharArray())
+            {
+                textBox.text += letter;
+                yield return new WaitForSeconds(0.01f);
+            }
+
+            yield return new WaitForSeconds(0.4f);
+
+            textBox = leftUp;
+            text = creating.options.leftUp;
+            foreach (var letter in text.ToCharArray())
+            {
+                textBox.text += letter;
+                yield return new WaitForSeconds(0.01f);
+            }
+            
+            yield return new WaitForSeconds(0.4f);
+
+            textBox = leftDown;
+            text = creating.options.leftDown;
+            foreach (var letter in text.ToCharArray())
+            {
+                textBox.text += letter;
+                yield return new WaitForSeconds(0.01f);
+            }
+
+            yield return new WaitForSeconds(0.4f);
+
+            textBox = rightUp;
+            text = creating.options.rightUp;
+            foreach (var letter in text.ToCharArray())
+            {
+                textBox.text += letter;
+                yield return new WaitForSeconds(0.01f);
+            }
+
+            yield return new WaitForSeconds(0.4f);
+
+            textBox = rightDown;
+            text = creating.options.rightDown;
+            foreach (var letter in text.ToCharArray())
+            {
+                textBox.text += letter;
+                yield return new WaitForSeconds(0.01f);
+            }
+        }
+
+        void ResetTextBoxes()
+        {
+            question.text = "";
+
+            leftUp.text = "";
+            leftDown.text = "";
+            rightUp.text = "";
+            rightDown.text = "";
         }
 
         void Start()
@@ -39,7 +100,7 @@ namespace Question
         }
         void InitializeManager()
         {
-            manager = FindObjectOfType<Ansver.Manager>();
+            manager = FindObjectOfType<Ansver.CManager>();
         }
     } 
 }

@@ -13,8 +13,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - MostUp
+  - Under
   - 
   - 
   - 
@@ -38,15 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: MostUp
+    uniqueID: 2732029687
+    locked: 0
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: back
-    uniqueID: 320342331
-    locked: 0
-  - name: mid
-    uniqueID: 122318009
-    locked: 0
-  - name: for
-    uniqueID: 3953419145
     locked: 0

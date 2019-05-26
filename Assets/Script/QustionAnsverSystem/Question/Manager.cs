@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
-using Service;
 
 namespace Question
 {
@@ -12,8 +10,23 @@ namespace Question
 
         Loader loader;
         Thread loaderThread;
+        bool isInitialQuestionNotSet = true;
+        bool isSceneLoaded = false;
+        public GameObject objectToOff;
+        public Character.Mediator character;
+        public Enemy.Mediator enemy;
 
         Queue<QuestionStruct> questions = new Queue<QuestionStruct>();
+
+        public void OnSceneLoaded()
+        {
+            if (isInitialQuestionNotSet)
+            {
+                objectToOff.SetActive(false);
+                isSceneLoaded = true;
+            }
+
+        }
 
         void LoadQuestions()
         {
@@ -30,6 +43,7 @@ namespace Question
             loaderThread.Start();
         }
 
+
         public void OnQuestionAdd(QuestionStruct question)
         {
             AddQuestion(question);
@@ -40,6 +54,15 @@ namespace Question
             {
                 questions.Enqueue(question);
             }
+        }
+        bool IsInitialQuestionReadyToSet()
+        {
+            return isSceneLoaded && isInitialQuestionNotSet && HasAnyQuestion();
+        }
+        void SetInitialQuestion()
+        {
+            SetNextQuestion();
+            isInitialQuestionNotSet = false;
         }
 
         public void OnAnsver(bool isCorrectAnsver)
@@ -59,7 +82,8 @@ namespace Question
         }
         void GoToNextQuestion()
         {
-            SetNextQuestion();
+            if(!character.IsGameLost() && !enemy.IsDie())
+                SetNextQuestion();
         }
         void SetNextQuestion()
         {
@@ -78,6 +102,11 @@ namespace Question
         {
             Service.QuestionCreator.CreateQuestionsBinaryFileFromXML();
             LoadQuestions();
+        }
+        private void Update()
+        {
+            if (IsInitialQuestionReadyToSet())
+                SetInitialQuestion();
         }
     }
 

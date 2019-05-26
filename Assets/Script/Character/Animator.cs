@@ -1,12 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Character
 {
     public class Animator : MonoBehaviour
     {
         UnityEngine.Animator animator;
+        public AudioSource source;
+        public AudioClip playerShotSound;
+        public AudioClip playerContactSound;
 
         void Start()
         {
@@ -15,17 +16,26 @@ namespace Character
 
         public void PlayAttack()
         {
-            animator.Play("Attack");
+            animator.SetTrigger("Attack");
+        }
+
+        public void SoundAttack()
+        {
+            source.PlayOneShot(playerShotSound);
+        }
+        public void SoundContact()
+        {
+            source.PlayOneShot(playerContactSound);
         }
 
         public void PlayAttacked()
         {
-            animator.Play("Attacked");
+            animator.SetTrigger("Attacked");
         }
 
         public void PlayLostGame()
         {
-            animator.Play("LostGame");
+            animator.SetBool("LostGame", true);
         }
     } 
 }

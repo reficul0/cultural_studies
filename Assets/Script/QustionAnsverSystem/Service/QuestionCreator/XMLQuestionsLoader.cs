@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
@@ -8,7 +7,7 @@ namespace Service
 {
     public class XMLQuestionsLoader
     {
-        private readonly string questionsFile = Application.persistentDataPath + "/questions.xml";
+        private readonly string questionsFile = Application.dataPath + "/questions.xml";
 
         public static void ReadQuestion(XmlTextReader reader, QuestionStruct que)
         {
@@ -58,40 +57,6 @@ namespace Service
 
         internal QuestionStruct[] Load()
         {
-            //XmlTextWriter writer = new XmlTextWriter(questionsFile, System.Text.Encoding.UTF8);
-            //writer.WriteStartElement("Questions");
-            //writer.WriteStartElement("Question");
-            //writer.WriteStartAttribute("correct");
-            //writer.WriteValue(1);
-            //writer.WriteStartAttribute("text");
-            //writer.WriteValue("ты пидор?");
-            //writer.WriteStartAttribute("leftUp");
-            //writer.WriteValue("даlu");
-            //writer.WriteStartAttribute("leftDown");
-            //writer.WriteValue("даld");
-            //writer.WriteStartAttribute("rightUp");
-            //writer.WriteValue("даru");
-            //writer.WriteStartAttribute("rightDown");
-            //writer.WriteValue("даrd");
-            //writer.WriteEndAttribute();
-            //writer.WriteFullEndElement();
-            //writer.WriteStartElement("Question");
-            //writer.WriteStartAttribute("correct");
-            //writer.WriteValue(2);
-            //writer.WriteStartAttribute("text");
-            //writer.WriteValue("ты пидор?");
-            //writer.WriteStartAttribute("leftUp");
-            //writer.WriteValue("даlu");
-            //writer.WriteStartAttribute("leftDown");
-            //writer.WriteValue("даld");
-            //writer.WriteStartAttribute("rightUp");
-            //writer.WriteValue("даru");
-            //writer.WriteStartAttribute("rightDown");
-            //writer.WriteValue("даrd");
-            //writer.WriteEndAttribute();
-            //writer.WriteFullEndElement();
-            //writer.Close();
-
             XmlTextReader reader = new XmlTextReader(questionsFile);
             CheckStartingElement(reader, "Questions", true);
 
